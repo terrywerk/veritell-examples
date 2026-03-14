@@ -47,13 +47,20 @@ jobs:
 
       - name: Run passing public demos
         run: |
-          veritell test ./grounded_rag.yaml
-          veritell test ./abstention.yaml
-          veritell test ./structured_output.yaml
+          veritell test ./examples/grounded-rag/grounded_rag.yaml
+          veritell test ./examples/abstention/abstention.yaml
+          veritell test ./examples/structured-output/structured_output.yaml
+
+      - name: Verify recursive examples discovery
+        run: |
+          if veritell test ./examples/; then
+            echo "Expected the full examples suite to fail because the hallucination example is intentionally failing."
+            exit 1
+          fi
 
       - name: Verify CI gating failure demo
         run: |
-          if veritell test ./hallucination_failure.yaml --fail-below 80; then
+          if veritell test ./examples/hallucination-failure/hallucination_failure.yaml --fail-below 80; then
             echo "Expected hallucination gating example to fail, but it passed."
             exit 1
           fi

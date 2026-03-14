@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="250" viewBox="0 0 980 250" role="img" aria-labelledby="title desc">
+  <title id="title">Expected output for structured output example</title>
+  <desc id="desc">Terminal-style screenshot for a passing structured-output Veritell run.</desc>
+  <rect width="980" height="250" rx="14" fill="#0f172a"/>
+  <rect x="18" y="18" width="944" height="214" rx="10" fill="#111827" stroke="#334155"/>
+  <circle cx="42" cy="42" r="7" fill="#ef4444"/>
+  <circle cx="64" cy="42" r="7" fill="#f59e0b"/>
+  <circle cx="86" cy="42" r="7" fill="#22c55e"/>
+  <g font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#e5e7eb">
+    <text x="34" y="82">Suite: examples/structured-output/structured_output.yaml</text>
+    <text x="34" y="116" fill="#86efac">PASS public_structured_output_refund_policy-abc123 score=1.00 assertions=2/2 methods=deterministic</text>
+    <text x="34" y="150">Summary: total=1 passed=1 failed=0 errors=0 skipped=0 reliability=100.00% score=1.00</text>
+    <text x="34" y="186" fill="#93c5fd">Checks: response_format_valid, json_schema_valid</text>
+  </g>
+</svg>
+

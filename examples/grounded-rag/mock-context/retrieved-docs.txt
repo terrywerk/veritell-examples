@@ -1,0 +1,11 @@
+# Retrieved documents used by the grounded RAG example
+
+Document 1
+----------
+Contractors do not receive PTO benefits. Full-time employees receive 15 PTO days per year.
+
+Why this matters
+----------------
+- The example answer should mention only the contractor policy.
+- The retrieval assertions verify that this supporting evidence is present.
+

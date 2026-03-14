@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="330" viewBox="0 0 1120 330" role="img" aria-labelledby="title desc">
+  <title id="title">Expected output for hallucination failure example</title>
+  <desc id="desc">Terminal-style screenshot for a failing Veritell run with unsupported span highlighting and a failed gate.</desc>
+  <rect width="1120" height="330" rx="14" fill="#0f172a"/>
+  <rect x="18" y="18" width="1084" height="294" rx="10" fill="#111827" stroke="#334155"/>
+  <circle cx="42" cy="42" r="7" fill="#ef4444"/>
+  <circle cx="64" cy="42" r="7" fill="#f59e0b"/>
+  <circle cx="86" cy="42" r="7" fill="#22c55e"/>
+  <g font-family="Consolas, 'Courier New', monospace" font-size="19" fill="#e5e7eb">
+    <text x="34" y="82">Suite: examples/hallucination-failure/hallucination_failure.yaml</text>
+    <text x="34" y="116" fill="#fca5a5">FAIL public_hallucination_failure_refund_window-abc123 score=0.00 assertions=0/1 methods=heuristic</text>
+    <text x="34" y="150">  failed assertions:</text>
+    <text x="34" y="184">    - no_unsupported_claims [fail] method=heuristic confidence=0.643</text>
+    <text x="34" y="218">      unsupported spans:</text>
+    <text x="34" y="252" fill="#fde68a">        - "45"</text>
+    <text x="34" y="286">Gate: threshold=80.00 score=0.00 passed=false</text>
+  </g>
+</svg>
+

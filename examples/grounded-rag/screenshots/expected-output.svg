@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="260" viewBox="0 0 980 260" role="img" aria-labelledby="title desc">
+  <title id="title">Expected output for grounded RAG example</title>
+  <desc id="desc">Terminal-style screenshot for a passing grounded RAG Veritell run.</desc>
+  <rect width="980" height="260" rx="14" fill="#0f172a"/>
+  <rect x="18" y="18" width="944" height="224" rx="10" fill="#111827" stroke="#334155"/>
+  <circle cx="42" cy="42" r="7" fill="#ef4444"/>
+  <circle cx="64" cy="42" r="7" fill="#f59e0b"/>
+  <circle cx="86" cy="42" r="7" fill="#22c55e"/>
+  <g font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#e5e7eb">
+    <text x="34" y="82">Suite: examples/grounded-rag/grounded_rag.yaml</text>
+    <text x="34" y="116" fill="#86efac">PASS public_grounded_rag_contractors_pto-abc123 score=1.00 assertions=3/3 methods=deterministic,heuristic</text>
+    <text x="34" y="150">Summary: total=1 passed=1 failed=0 errors=0 skipped=0 reliability=100.00% score=1.00</text>
+    <text x="34" y="196" fill="#93c5fd">Checks: expected_doc_retrieved, retrieval_contains_answer, no_unsupported_claims</text>
+  </g>
+</svg>
+

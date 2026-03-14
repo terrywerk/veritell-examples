@@ -1,0 +1,11 @@
+# Retrieved documents used by the abstention example
+
+Document 1
+----------
+The available policy materials do not contain PTO rules for the year 2003.
+
+Why this matters
+----------------
+- The system should abstain instead of inventing a policy year answer.
+- The grounding assertion should still pass because the answer acknowledges the missing evidence.
+

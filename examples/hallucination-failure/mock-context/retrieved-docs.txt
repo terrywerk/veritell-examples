@@ -1,0 +1,11 @@
+# Retrieved documents used by the hallucination failure example
+
+Document 1
+----------
+Refunds are allowed within 30 days of purchase. Exchanges are allowed within 60 days.
+
+Why this matters
+----------------
+- The mocked answer says 45 days, which is not supported.
+- This example is intentionally failing so teams can demonstrate unsupported span highlighting and CI gating.
+
