@@ -79,6 +79,16 @@ veritell test .\examples\structured-output\structured_output.yaml
 veritell test .\examples\hallucination-failure\hallucination_failure.yaml
 ```
 
+Example output:
+
+```text
+Suite: examples/grounded-rag/grounded_rag.yaml
+PASS public_grounded_rag_contractors_pto-<generated-id> score=1.00 assertions=3/3 methods=deterministic,heuristic
+Summary: total=1 passed=1 failed=0 errors=0 skipped=0 reliability=100.00% score=1.00
+```
+
+This keeps the output compact while still showing the key information most teams care about in local runs and CI logs.
+
 If you are developing locally with the sibling repo in this workspace, you can install it from source:
 
 ```powershell
