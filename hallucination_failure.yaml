@@ -1,0 +1,19 @@
+schema_version: v1
+name: public_hallucination_failure_refund_window
+description: Public intentional hallucination failure that shows unsupported span highlighting and CI gating.
+input:
+  question: "What is the refund window?"
+context:
+  retrieved_docs:
+    - "Refunds are allowed within 30 days of purchase. Exchanges are allowed within 60 days."
+  reference_answer: "Refunds are allowed within 30 days of purchase."
+assertions:
+  - type: no_unsupported_claims
+metadata:
+  tags:
+    - public-example
+    - hallucination
+    - failure
+    - ci-gating
+  mock_response: "Refunds are allowed within 45 days of purchase."
+

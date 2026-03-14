@@ -1,0 +1,22 @@
+schema_version: v1
+name: public_grounded_rag_contractors_pto
+description: Public grounded RAG example that checks retrieved evidence, answer coverage, and unsupported claims.
+input:
+  question: "How much PTO do contractors get?"
+context:
+  retrieved_docs:
+    - "Contractors do not receive PTO benefits. Full-time employees receive 15 PTO days per year."
+  expected_docs:
+    - "Contractors do not receive PTO benefits. Full-time employees receive 15 PTO days per year."
+  reference_answer: "Contractors do not receive PTO benefits."
+assertions:
+  - type: expected_doc_retrieved
+  - type: retrieval_contains_answer
+  - type: no_unsupported_claims
+metadata:
+  tags:
+    - public-example
+    - rag
+    - grounding
+  mock_response: "Contractors do not receive PTO benefits."
+

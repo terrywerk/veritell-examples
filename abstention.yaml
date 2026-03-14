@@ -1,0 +1,19 @@
+schema_version: v1
+name: public_abstention_unknown_policy_year
+description: Public abstention example for missing policy-year evidence.
+input:
+  question: "What was the contractor PTO policy in 2003?"
+context:
+  retrieved_docs:
+    - "The available policy materials do not contain PTO rules for the year 2003."
+  reference_answer: "I don't know because the provided context does not include the 2003 contractor PTO policy."
+assertions:
+  - type: should_abstain
+  - type: no_unsupported_claims
+metadata:
+  tags:
+    - public-example
+    - abstention
+    - grounding
+  mock_response: "I don't know because the provided context does not include the 2003 contractor PTO policy."
+

@@ -1,0 +1,61 @@
+name: Examples CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  demo-suite:
+    runs-on: ubuntu-latest
+    env:
+      VERITELL_CLI_REPO_TOKEN: ${{ secrets.VERITELL_CLI_REPO_TOKEN }}
+
+    steps:
+      - name: Check out veritell-examples
+        uses: actions/checkout@v4
+
+      - name: Validate private CLI repo token is configured
+        run: |
+          if [ -z "$VERITELL_CLI_REPO_TOKEN" ]; then
+            echo "Missing secret VERITELL_CLI_REPO_TOKEN."
+            echo "Create a fine-grained PAT or GitHub App token with Contents: Read access to terrywerk/veritell-cli."
+            exit 1
+          fi
+
+      - name: Check out private veritell-cli
+        uses: actions/checkout@v4
+        with:
+          repository: terrywerk/veritell-cli
+          path: veritell-cli
+          token: ${{ secrets.VERITELL_CLI_REPO_TOKEN }}
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install veritell-cli
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ./veritell-cli
+
+      - name: Run passing public demos
+        run: |
+          veritell test ./grounded_rag.yaml
+          veritell test ./abstention.yaml
+          veritell test ./structured_output.yaml
+
+      - name: Verify CI gating failure demo
+        run: |
+          if veritell test ./hallucination_failure.yaml --fail-below 80; then
+            echo "Expected hallucination gating example to fail, but it passed."
+            exit 1
+          fi
+          echo "Hallucination gating example failed as expected."
+
