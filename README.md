@@ -157,13 +157,15 @@ veritell test .\examples\
 
 This repo includes a small GitHub Actions workflow at `.github/workflows/examples-ci.yml`.
 
-It automatically:
+When `VERITELL_CLI_REPO_TOKEN` is configured, it automatically:
 
 - installs `veritell-cli`
 - runs the three passing public demos
 - verifies the hallucination failure example fails CI gating as expected
 
-Because `terrywerk/veritell-cli` is private, the workflow expects a repository secret named `VERITELL_CLI_REPO_TOKEN`.
+When the token is not configured, the workflow stays green and records a clear skip notice instead of failing the run.
+
+Because `terrywerk/veritell-cli` is private, the workflow expects a repository secret named `VERITELL_CLI_REPO_TOKEN` for full validation.
 Use a fine-grained PAT or GitHub App token with **Contents: Read** access to `terrywerk/veritell-cli`.
 
 ## Notes

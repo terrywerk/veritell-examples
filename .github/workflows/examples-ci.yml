@@ -19,15 +19,30 @@ jobs:
       - name: Check out veritell-examples
         uses: actions/checkout@v4
 
-      - name: Validate private CLI repo token is configured
+      - name: Detect private CLI token availability
+        id: token_status
+        shell: bash
         run: |
-          if [ -z "$VERITELL_CLI_REPO_TOKEN" ]; then
-            echo "Missing secret VERITELL_CLI_REPO_TOKEN."
-            echo "Create a fine-grained PAT or GitHub App token with Contents: Read access to terrywerk/veritell-cli."
-            exit 1
+          if [ -n "$VERITELL_CLI_REPO_TOKEN" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Note skipped private CLI validation
+        if: steps.token_status.outputs.available != 'true'
+        shell: bash
+        run: |
+          echo "VERITELL_CLI_REPO_TOKEN is not configured; skipping private veritell-cli checkout and demo execution."
+          {
+            echo "## Examples CI"
+            echo
+            echo "Skipped private demo execution because \\`VERITELL_CLI_REPO_TOKEN\\` is not configured."
+            echo "Add a fine-grained PAT or GitHub App token with **Contents: Read** access to \\`terrywerk/veritell-cli\\` to enable the full workflow."
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Check out private veritell-cli
+        if: steps.token_status.outputs.available == 'true'
         uses: actions/checkout@v4
         with:
           repository: terrywerk/veritell-cli
@@ -36,22 +51,26 @@ jobs:
           persist-credentials: false
 
       - name: Set up Python
+        if: steps.token_status.outputs.available == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install veritell-cli
+        if: steps.token_status.outputs.available == 'true'
         run: |
           python -m pip install --upgrade pip
           python -m pip install -e ./veritell-cli
 
       - name: Run passing public demos
+        if: steps.token_status.outputs.available == 'true'
         run: |
           veritell test ./examples/grounded-rag/grounded_rag.yaml
           veritell test ./examples/abstention/abstention.yaml
           veritell test ./examples/structured-output/structured_output.yaml
 
       - name: Verify recursive examples discovery
+        if: steps.token_status.outputs.available == 'true'
         run: |
           if veritell test ./examples/; then
             echo "Expected the full examples suite to fail because the hallucination example is intentionally failing."
@@ -59,6 +78,7 @@ jobs:
           fi
 
       - name: Verify CI gating failure demo
+        if: steps.token_status.outputs.available == 'true'
         run: |
           if veritell test ./examples/hallucination-failure/hallucination_failure.yaml --fail-below 80; then
             echo "Expected hallucination gating example to fail, but it passed."
