@@ -1,34 +1,87 @@
-[![Examples CI](https://github.com/terrywerk/veritell-examples/actions/workflows/examples-ci.yml/badge.svg)](https://github.com/terrywerk/veritell-examples/actions/workflows/examples-ci.yml)
-
 # Veritell Examples
 
-Public-facing example suites for Veritell CLI.
+Detect hallucinations, broken RAG, and unsafe AI outputs in under 2 minutes.
 
-Examples of AI reliability tests for RAG systems, agent workflows, and structured-output applications.
+This repository contains ready-to-run AI reliability tests that simulate real-world failures — so you can see exactly how Veritell catches issues **before they reach production**.
 
-Veritell helps teams catch:
-- unsupported claims
-- retrieval misses
-- missing abstentions
-- schema/format regressions
+---
 
-before deployment.
+## ⚡ Start here (60-second demo)
 
-## Why Veritell?
+Run a failing test first to see what breaks:
 
-Observability tools show what happened.
-Veritell helps teams test AI behavior before deployment using repeatable assertions like:
+```bash
+veritell test .\examples\hallucination-failure\hallucination_failure.yaml
+```
 
-- no_unsupported_claims
-- retrieval_contains_answer
-- should_abstain
-- json_schema_valid
+You’ll immediately see:
 
-They are designed to work out-of-box with `veritell-cli` and use fixed `mock_response` values, so you can run them without connecting a live model.
+* ❌ Unsupported claims flagged
+* ❌ Reliability score drop
+* ❌ CI gating failure
 
-## Folder structure
+This is exactly the kind of issue that typically ships unnoticed.
 
-```text
+---
+
+## 🧠 What Veritell does
+
+Most teams rely on logs and observability **after something goes wrong**.
+
+Veritell helps you test AI behavior **before deployment** using repeatable assertions like:
+
+* `no_unsupported_claims`
+* `retrieval_contains_answer`
+* `should_abstain`
+* `json_schema_valid`
+
+Think of it as:
+
+> **Unit testing for LLM behavior**
+
+---
+
+## 🎯 Try it on your own AI system
+
+Run Veritell against your own prompts, RAG pipelines, or agents:
+
+👉 https://veritell.ai/scan
+👉 https://veritell.ai/join-beta
+
+Free beta access available.
+
+---
+
+## 👥 Who this is for
+
+* Teams building RAG applications
+* AI agents in production
+* LLM-powered features with compliance or risk concerns
+* Engineering teams that want CI/CD reliability for AI
+
+---
+
+## 📦 What’s in this repo
+
+Examples of AI reliability testing for:
+
+* Grounded RAG systems
+* Abstention behavior
+* Structured outputs (JSON/schema validation)
+* Hallucination detection and failure scenarios
+
+Each example includes:
+
+* Test YAML definitions
+* Mock context or supporting data
+* Expected outputs
+* Failure scenarios
+
+---
+
+## 📂 Folder structure
+
+```
 examples/
   grounded-rag/
     grounded_rag.yaml
@@ -53,109 +106,99 @@ examples/
     screenshots/
 ```
 
-Each example folder is designed to grow over time with:
+---
 
-- the primary test YAML
-- mock context or supporting docs
-- implementation notes or walkthrough docs
-- screenshots or expected output captures
+## 🚀 Quick start
 
-## Files in this repo
+With `veritell-cli` installed:
 
-- `examples/grounded-rag/grounded_rag.yaml`
-- `examples/abstention/abstention.yaml`
-- `examples/structured-output/structured_output.yaml`
-- `examples/structured-output/refund_policy_schema.json`
-- `examples/hallucination-failure/hallucination_failure.yaml`
-
-## Quick start
-
-From this repo, with `veritell-cli` already installed in your environment:
-
-```powershell
+```bash
 veritell test .\examples\grounded-rag\grounded_rag.yaml
 veritell test .\examples\abstention\abstention.yaml
 veritell test .\examples\structured-output\structured_output.yaml
 veritell test .\examples\hallucination-failure\hallucination_failure.yaml
 ```
 
-Example output:
+Run all examples:
 
-```text
+```bash
+veritell test .\examples\
+```
+
+---
+
+## 📊 Example output
+
+```
 Suite: examples/grounded-rag/grounded_rag.yaml
-PASS public_grounded_rag_contractors_pto-<generated-id> score=1.00 assertions=3/3 methods=deterministic,heuristic
-Summary: total=1 passed=1 failed=0 errors=0 skipped=0 reliability=100.00% score=1.00
+
+PASS public_grounded_rag_contractors_pto-<generated-id>
+score=1.00 assertions=3/3 methods=deterministic,heuristic
+
+Summary:
+total=1 passed=1 failed=0 errors=0 skipped=0
+reliability=100.00% score=1.00
 ```
 
-This keeps the output compact while still showing the key information most teams care about in local runs and CI logs.
+Veritell keeps output compact while surfacing what matters:
 
-If you are developing locally with the sibling repo in this workspace, you can install it from source:
+* Pass/fail status
+* Reliability score
+* Assertion coverage
 
-```powershell
-python -m pip install -e ..\veritell-cli
-```
+---
 
-## What each example demonstrates
+## 🔍 What each example demonstrates
 
-### `grounded_rag.yaml`
+### grounded_rag.yaml
 
-Location:
-- `examples/grounded-rag/grounded_rag.yaml`
+* Retrieval contains the correct answer
+* Context supports the response
+* No unsupported claims introduced
 
-Checks:
+---
 
-- expected evidence was retrieved
-- retrieved context contains the answer
-- final response is grounded and does not introduce unsupported claims
+### abstention.yaml
 
-### `abstention.yaml`
+* Model abstains when evidence is missing
+* Abstention stays grounded in context
 
-Location:
-- `examples/abstention/abstention.yaml`
+---
 
-Checks:
+### structured_output.yaml
 
-- the system abstains when the evidence is missing
-- the abstaining answer stays grounded in the provided context
+* Output is valid JSON
+* Output conforms to required schema
 
-### `structured_output.yaml`
+---
 
-Location:
-- `examples/structured-output/structured_output.yaml`
+### hallucination_failure.yaml
 
-Checks:
+* Unsupported claim detection triggers
+* Problematic spans are highlighted
+* CI reliability gating fails when below threshold
 
-- the response is valid JSON
-- the response matches the required schema
+---
 
-### `hallucination_failure.yaml`
-
-Location:
-- `examples/hallucination-failure/hallucination_failure.yaml`
-
-Checks:
-
-- unsupported claim detection fires
-- terminal output highlights unsupported spans
-- CI reliability gating fails when the score is below threshold
-
-## CI gating demo
+## 🧪 CI reliability gating
 
 Passing example:
 
-```powershell
+```bash
 veritell test .\examples\grounded-rag\grounded_rag.yaml --fail-below 80
 ```
 
 Failing example:
 
-```powershell
+```bash
 veritell test .\examples\hallucination-failure\hallucination_failure.yaml --fail-below 80
 ```
 
-## Full demo sequence
+---
 
-```powershell
+## 🔁 Full demo sequence
+
+```bash
 veritell test .\examples\grounded-rag\grounded_rag.yaml
 veritell test .\examples\abstention\abstention.yaml
 veritell test .\examples\structured-output\structured_output.yaml
@@ -163,23 +206,70 @@ veritell test .\examples\hallucination-failure\hallucination_failure.yaml --fail
 veritell test .\examples\
 ```
 
-## Automated demo validation
+---
 
-This repo includes a small GitHub Actions workflow at `.github/workflows/examples-ci.yml`.
+## ⚙️ Local development setup
 
-When `VERITELL_CLI_REPO_TOKEN` is configured, it automatically:
+If working alongside the CLI repo:
 
-- installs `veritell-cli`
-- runs the three passing public demos
-- verifies the hallucination failure example fails CI gating as expected
+```bash
+python -m pip install -e ..\veritell-cli
+```
 
-When the token is not configured, the workflow stays green and records a clear skip notice instead of failing the run.
+---
 
-Because `terrywerk/veritell-cli` is private, the workflow expects a repository secret named `VERITELL_CLI_REPO_TOKEN` for full validation.
-Use a fine-grained PAT or GitHub App token with **Contents: Read** access to `terrywerk/veritell-cli`.
+## 🤖 Automated demo validation
 
-## Notes
+This repo includes a GitHub Actions workflow:
 
-- `structured_output.yaml` is self-contained and does not require the schema file to be resolved from your current working directory.
-- `refund_policy_schema.json` is included as a companion public example artifact for teams that want to inspect or reuse the schema directly.
-- Empty `mock-context/`, `docs/`, and `screenshots/` directories are intentionally tracked so each example has a stable place for future public assets.
+`.github/workflows/examples-ci.yml`
+
+When `VERITELL_CLI_REPO_TOKEN` is configured:
+
+* Installs `veritell-cli`
+* Runs passing demo suites
+* Verifies hallucination failure triggers CI gating
+
+If not configured:
+
+* Workflow remains green
+* Clear skip notice is logged
+
+---
+
+## 🔐 Required configuration
+
+Because `terrywerk/veritell-cli` is private, the workflow requires:
+
+```
+VERITELL_CLI_REPO_TOKEN
+```
+
+Use a fine-grained PAT or GitHub App token with:
+
+* **Contents: Read** access
+
+---
+
+## 📝 Notes
+
+* `structured_output.yaml` is self-contained
+* `refund_policy_schema.json` is included as a reusable example schema
+* Empty directories (`mock-context/`, `docs/`, `screenshots/`) are intentional for future assets
+
+---
+
+## 🚀 What to do next
+
+If you're building with LLMs:
+
+👉 Run these tests on your own system
+👉 Catch failures before your users do
+👉 Add AI reliability checks to your CI pipeline
+
+Start here:
+
+👉 https://veritell.ai/scan
+👉 https://veritell.ai/join-beta
+
+---
