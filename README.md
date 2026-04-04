@@ -41,13 +41,21 @@ Think of it as:
 
 ---
 
-## 🎯 Try it on your own AI system
+## 🎯 Try this on your own AI system
 
-Run Veritell against your own prompts, RAG pipelines, or agents:
+Curious what issues might exist in your LLM app?
 
-👉 https://veritell.ai/join-beta
+We’ll run a **free AI reliability scan** on your prompts, RAG pipeline, or agent workflows.
 
-Free beta access available.
+👉 Join the beta: https://veritell.ai/join-beta
+
+You’ll get:
+- Hallucination detection
+- Retrieval gap analysis
+- Schema / output validation
+- A reliability score
+
+(No setup required)
 
 ---
 
