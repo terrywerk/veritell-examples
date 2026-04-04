@@ -45,7 +45,6 @@ Think of it as:
 
 Run Veritell against your own prompts, RAG pipelines, or agents:
 
-👉 https://veritell.ai/scan
 👉 https://veritell.ai/join-beta
 
 Free beta access available.
@@ -269,7 +268,6 @@ If you're building with LLMs:
 
 Start here:
 
-👉 https://veritell.ai/scan
 👉 https://veritell.ai/join-beta
 
 ---
